@@ -1,0 +1,36 @@
+@use "../abstracts" as *;
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-gap, #{space(4)});
+
+    > * {
+        margin-block: 0;
+    }
+}
+
+.cluster {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-gap, #{space(3)});
+}
+
+.grid-auto {
+    display: grid;
+    gap: var(--grid-gap, #{space(4)});
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 16rem)), 1fr));
+}
+
+.cq {
+    container-type: inline-size;
+}
+
+.theme-scope {
+    background-color: token-color("background");
+    border: 1px solid token-color("border");
+    border-radius: var(--radius-lg);
+    color: token-color("text");
+    padding: space(5);
+}

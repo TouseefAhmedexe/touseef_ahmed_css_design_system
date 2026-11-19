@@ -1,0 +1,23 @@
+@use "sass:map";
+@use "sass:math";
+@use "variables" as *;
+
+@function to-rem($px, $base: 16) {
+    @return math.div($px, $base) * 1rem;
+}
+
+@function token-color($name) {
+    @if not map.has-key($palette-light, $name) {
+        @error "Unknown color token: #{$name}";
+    }
+
+    @return var(--color-#{$name});
+}
+
+@function space($step) {
+    @if not map.has-key($space-scale, "#{$step}") {
+        @error "Unknown space step: #{$step}";
+    }
+
+    @return var(--space-#{$step});
+}

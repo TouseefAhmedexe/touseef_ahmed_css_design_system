@@ -1,0 +1,41 @@
+@use "../abstracts" as *;
+
+.progress {
+    background-color: token-color("surface-alt");
+    block-size: var(--progress-height, 0.75rem);
+    border: 1px solid token-color("border-strong");
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+}
+
+.progress__bar {
+    background-color: var(--progress-color, #{token-color("primary")});
+    block-size: 100%;
+    inline-size: 0;
+    transition: inline-size var(--duration-base) var(--ease-standard);
+
+    @for $step from 0 through 10 {
+        &[data-value="#{$step * 10}"] {
+            inline-size: $step * 10%;
+        }
+    }
+}
+
+@each $name in $status-names {
+    .progress--#{$name} {
+        --progress-color: #{token-color($name)};
+    }
+}
+
+.progress--sm {
+    --progress-height: 0.4rem;
+}
+
+.progress--lg {
+    --progress-height: 1.1rem;
+}
+
+.progress--indeterminate .progress__bar {
+    animation: indeterminate 1.4s ease-in-out infinite;
+    inline-size: 40%;
+}

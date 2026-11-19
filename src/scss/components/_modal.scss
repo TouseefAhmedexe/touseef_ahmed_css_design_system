@@ -1,0 +1,48 @@
+@use "../abstracts" as *;
+
+.modal {
+    background-color: token-color("surface");
+    border: 1px solid token-color("border");
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    color: token-color("text");
+    inline-size: min(32rem, calc(100% - 2rem));
+    opacity: 1;
+    padding: 0;
+    transform: none;
+    transition: opacity var(--duration-base) var(--ease-standard), transform var(--duration-base) var(--ease-standard);
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+}
+
+@starting-style {
+    .modal[open] {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+}
+
+.modal__header {
+    border-block-end: 1px solid token-color("border");
+    padding: space(4) space(5);
+}
+
+.modal__title {
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+
+.modal__body {
+    padding: space(5);
+}
+
+.modal__footer {
+    border-block-start: 1px solid token-color("border");
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(2);
+    justify-content: flex-end;
+    padding: space(4) space(5);
+}

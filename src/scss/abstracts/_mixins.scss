@@ -1,0 +1,44 @@
+@use "sass:map";
+@use "variables" as *;
+
+@mixin respond-to($name) {
+    @if not map.has-key($breakpoints, $name) {
+        @error "Unknown breakpoint: #{$name}";
+    }
+
+    @media (min-width: map.get($breakpoints, $name)) {
+        @content;
+    }
+}
+
+@mixin focus-ring {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+}
+
+@mixin visually-hidden {
+    block-size: 1px;
+    clip-path: inset(50%);
+    inline-size: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+}
+
+@mixin emit-tokens($map, $prefix) {
+    @each $name, $value in $map {
+        --#{$prefix}-#{$name}: #{$value};
+    }
+}
+
+@mixin theme-tokens($palette, $scheme) {
+    color-scheme: $scheme;
+
+    @include emit-tokens($palette, "color");
+
+    @each $name, $value in $shadows {
+        --shadow-#{$name}: #{$value};
+    }
+}

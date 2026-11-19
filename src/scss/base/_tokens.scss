@@ -1,0 +1,19 @@
+@use "../abstracts" as *;
+
+:root {
+    --font-body: Arial, Helvetica, sans-serif;
+    --font-heading: Arial, Helvetica, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
+    --line-height-tight: 1.2;
+    --line-height-base: 1.6;
+    --duration-fast: 150ms;
+    --duration-base: 250ms;
+    --ease-standard: ease-in-out;
+    --z-tooltip: 10;
+    --z-sticky: 20;
+
+    @include emit-tokens($type-scale, "font-size");
+    @include emit-tokens($space-scale, "space");
+    @include emit-tokens($radii, "radius");
+    @include emit-tokens($container-widths, "container");
+}

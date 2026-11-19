@@ -1,0 +1,138 @@
+$breakpoints: (
+    "sm": 36em,
+    "md": 48em,
+    "lg": 64em,
+    "xl": 80em
+);
+
+$container-widths: (
+    "sm": 40rem,
+    "md": 48rem,
+    "lg": 64rem,
+    "xl": 72rem
+);
+
+$type-scale: (
+    "xs": 0.75rem,
+    "sm": 0.875rem,
+    "md": 1rem,
+    "lg": 1.125rem,
+    "xl": 1.25rem,
+    "2xl": 1.5rem,
+    "3xl": 1.875rem,
+    "4xl": 2.25rem
+);
+
+$space-scale: (
+    "1": 0.25rem,
+    "2": 0.5rem,
+    "3": 0.75rem,
+    "4": 1rem,
+    "5": 1.5rem,
+    "6": 2rem,
+    "7": 3rem,
+    "8": 4rem
+);
+
+$radii: (
+    "sm": 4px,
+    "md": 8px,
+    "lg": 12px,
+    "pill": 999px,
+    "full": 50%
+);
+
+$shadows: (
+    "sm": 0 1px 3px var(--color-shadow),
+    "md": 0 4px 12px var(--color-shadow),
+    "lg": 0 12px 28px var(--color-shadow)
+);
+
+$status-names: "info", "success", "warning", "danger";
+
+$core-colors: "primary", "secondary", "accent", "background", "surface", "text", "success", "warning", "danger", "info";
+
+$button-variants: (
+    "primary": ("bg": "primary", "fg": "on-primary", "hover": "primary-strong"),
+    "secondary": ("bg": "secondary", "fg": "on-secondary", "hover": "secondary-strong"),
+    "danger": ("bg": "danger", "fg": "on-danger", "hover": "danger-strong"),
+    "success": ("bg": "success", "fg": "on-success", "hover": "success-strong")
+);
+
+$button-sizes: (
+    "sm": ("height": 2rem, "padding": 0.75rem, "font": "sm"),
+    "md": ("height": 2.5rem, "padding": 1rem, "font": "md"),
+    "lg": ("height": 3rem, "padding": 1.5rem, "font": "lg")
+);
+
+$palette-light: (
+    "background": #f4f7fb,
+    "surface": #ffffff,
+    "surface-alt": #e8eef9,
+    "text": #1b2733,
+    "text-muted": #4b5a69,
+    "border": #c5d0e3,
+    "border-strong": #6b7c93,
+    "focus": #b45309,
+    "shadow": rgba(15, 23, 34, 0.18),
+    "link-visited": #6a3fb5,
+    "primary": #1b4db3,
+    "primary-strong": #0f2f73,
+    "primary-subtle": #dbe5f8,
+    "on-primary": #ffffff,
+    "secondary": #3d4b5c,
+    "secondary-strong": #27323f,
+    "on-secondary": #ffffff,
+    "accent": #b45309,
+    "on-accent": #ffffff,
+    "success": #1a6b35,
+    "success-strong": #124d26,
+    "success-subtle": #e6f4ea,
+    "on-success": #ffffff,
+    "warning": #8a4a00,
+    "warning-subtle": #fff3e0,
+    "on-warning": #ffffff,
+    "danger": #b3261e,
+    "danger-strong": #861b15,
+    "danger-subtle": #fdeceb,
+    "on-danger": #ffffff,
+    "info": #0b5f8a,
+    "info-subtle": #e3f2fa,
+    "on-info": #ffffff
+);
+
+$palette-dark: (
+    "background": #0f1722,
+    "surface": #17212f,
+    "surface-alt": #1f2d42,
+    "text": #e6edf5,
+    "text-muted": #a8b5c4,
+    "border": #33445c,
+    "border-strong": #7f93ad,
+    "focus": #fbbf24,
+    "shadow": rgba(0, 0, 0, 0.55),
+    "link-visited": #c4a8ff,
+    "primary": #7aa7ff,
+    "primary-strong": #a9c4ff,
+    "primary-subtle": #1b2a44,
+    "on-primary": #0b1220,
+    "secondary": #a8b5c4,
+    "secondary-strong": #c9d3de,
+    "on-secondary": #0b1220,
+    "accent": #fbbf24,
+    "on-accent": #1b1300,
+    "success": #4ade80,
+    "success-strong": #86efac,
+    "success-subtle": #12301f,
+    "on-success": #052e16,
+    "warning": #fbbf24,
+    "warning-subtle": #35260a,
+    "on-warning": #1b1300,
+    "danger": #f87171,
+    "danger-strong": #fca5a5,
+    "danger-subtle": #3a1514,
+    "on-danger": #2b0a0a,
+    "info": #5bc0eb,
+    "info-subtle": #0f2a3a,
+    "on-info": #04202e
+);

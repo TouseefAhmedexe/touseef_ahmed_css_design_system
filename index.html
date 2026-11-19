@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Documentation of the Bloomrix UI design system: tokens, themes and components with their variations and states.">
+    <meta name="author" content="Touseef Ahmed">
+    <script src="js/early-init.js"></script>
+    <link rel="stylesheet" href="dist/bloomrix-ui.css">
+    <link rel="stylesheet" href="docs/docs.css">
+    <script type="module" src="js/docs.js"></script>
+    <title>Bloomrix UI | Design System Documentation</title>
+</head>
+
+<body id="top">
+    <a class="docs-skip" href="#main-content">Skip to main content</a>
+
+    <header class="docs-header">
+        <div class="docs-header__inner">
+            <a class="docs-header__brand" href="#start">Bloomrix UI</a>
+
+            <div class="theme-switch cluster">
+                <span class="type-caption" data-theme-status role="status"></span>
+                <button class="btn btn--outline btn--sm" type="button" data-theme-toggle>Switch theme</button>
+                <button class="btn btn--ghost btn--sm" type="button" data-theme-system>Use device theme</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-layout">
+        <nav class="docs-nav" aria-label="Documentation sections">
+            <ul class="docs-nav__list">
+                <li><a href="#start">Getting started</a></li>
+                <li><a href="#themes">Themes</a></li>
+                <li><a href="#tokens">Design tokens</a></li>
+                <li><a href="#typography">Typography</a></li>
+                <li><a href="#buttons">Buttons</a></li>
+                <li><a href="#forms">Forms</a></li>
+                <li><a href="#cards">Cards</a></li>
+                <li><a href="#feedback">Alerts, badges and progress</a></li>
+                <li><a href="#overlays">Tooltips and modal</a></li>
+                <li><a href="#responsive">Responsive behavior</a></li>
+            </ul>
+        </nav>
+
+        <main class="docs-main" id="main-content" tabindex="-1">
+            <section class="docs-section" id="start">
+                <h1>Bloomrix UI</h1>
+                <p class="type-lead">A small CSS design system and component library. It is written in SCSS, compiled to one CSS file, and themed with CSS custom properties.</p>
+
+                <h2>Use it in a page</h2>
+                <ol>
+                    <li>Run <code>npm run build</code> to create <code>dist/bloomrix-ui.css</code>.</li>
+                    <li>Link the file in the <code>&lt;head&gt;</code> of any page.</li>
+                    <li>Optional: add <code>js/early-init.js</code> and <code>js/theme.js</code> to remember a chosen theme.</li>
+                </ol>
+
+<pre><code>&lt;link rel="stylesheet" href="dist/bloomrix-ui.css"&gt;
+
+&lt;button class="btn btn--primary" type="button"&gt;Save&lt;/button&gt;</code></pre>
+
+                <h2>Naming conventions</h2>
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Pattern</th>
+                                <th scope="col">Example</th>
+                                <th scope="col">Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Block</td>
+                                <td><code>.card</code></td>
+                                <td>A component that stands on its own</td>
+                            </tr>
+                            <tr>
+                                <td>Element</td>
+                                <td><code>.card__title</code></td>
+                                <td>A part of a block</td>
+                            </tr>
+                            <tr>
+                                <td>Modifier</td>
+                                <td><code>.btn--primary</code>, <code>.field--error</code></td>
+                                <td>A variation or a state of a block</td>
+                            </tr>
+                            <tr>
+                                <td>Layout primitive</td>
+                                <td><code>.stack</code>, <code>.cluster</code>, <code>.grid-auto</code>, <code>.cq</code></td>
+                                <td>Spacing and layout helpers with no look of their own</td>
+                            </tr>
+                            <tr>
+                                <td>Utility</td>
+                                <td><code>.u-mt-4</code>, <code>.u-bg-primary</code></td>
+                                <td>One job, usable on any element</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Cascade layers</h2>
+                <p>The layers are declared in this order. A later layer always wins over an earlier one, whatever the selector.</p>
+                <ol>
+                    <li><code>reset</code>: removes browser defaults</li>
+                    <li><code>tokens</code>: spacing, type, radius and width values</li>
+                    <li><code>themes</code>: color and shadow values for light and dark</li>
+                    <li><code>base</code>: typography and element styles</li>
+                    <li><code>layout</code>: containers and layout primitives</li>
+                    <li><code>components</code>: buttons, forms, cards and the rest</li>
+                    <li><code>utilities</code>: small helper classes</li>
+                    <li><code>overrides</code>: reduced motion</li>
+                </ol>
+            </section>
+
+            <section class="docs-section" id="themes">
+                <h2>Themes</h2>
+                <p>Every color comes from a CSS custom property. The light values are set on <code>:root</code>. The dark values are used when <code>data-theme="dark"</code> is set on an element, or when the device prefers a dark scheme and no theme has been chosen.</p>
+                <p>Because the tokens are set on any element that has <code>data-theme</code>, one part of a page can use a different theme from the rest. The two panels below use the same markup.</p>
+
+                <div class="docs-theme-preview">
+                    <div class="theme-scope stack" data-theme="light">
+                        <h3>Light panel</h3>
+                        <p>Components read the tokens of the nearest <code>data-theme</code>.</p>
+                        <div class="cluster">
+                            <button class="btn btn--primary" type="button">Primary</button>
+                            <button class="btn btn--outline" type="button">Outline</button>
+                            <span class="badge badge--success">Success</span>
+                        </div>
+                        <div class="alert alert--info">
+                            <p class="alert__title">Info</p>
+                            <p class="alert__text">This alert is in the light theme.</p>
+                        </div>
+                    </div>
+
+                    <div class="theme-scope stack" data-theme="dark">
+                        <h3>Dark panel</h3>
+                        <p>Components read the tokens of the nearest <code>data-theme</code>.</p>
+                        <div class="cluster">
+                            <button class="btn btn--primary" type="button">Primary</button>
+                            <button class="btn btn--outline" type="button">Outline</button>
+                            <span class="badge badge--success">Success</span>
+                        </div>
+                        <div class="alert alert--info">
+                            <p class="alert__title">Info</p>
+                            <p class="alert__text">This alert is in the dark theme.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Switching themes</h3>
+                <ul>
+                    <li>The buttons in the header switch the whole page. The choice is saved in <code>localStorage</code>.</li>
+                    <li>When nothing is saved, the page follows your device through <code>prefers-color-scheme</code>.</li>
+                    <li><strong>Use device theme</strong> removes the saved choice.</li>
+                </ul>
+            </section>
+
+            <section class="docs-section" id="tokens">
+                <h2>Design tokens</h2>
+                <p>The values below are read from the page while it runs, so they change when you change the theme.</p>
+
+                <h3>Core colors</h3>
+                <ul class="swatch-list">
+                    <li class="swatch"><span class="swatch__color u-bg-primary"></span><strong>Primary</strong><code>--color-primary</code><code data-token="--color-primary"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-secondary"></span><strong>Secondary</strong><code>--color-secondary</code><code data-token="--color-secondary"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-accent"></span><strong>Accent</strong><code>--color-accent</code><code data-token="--color-accent"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-background"></span><strong>Background</strong><code>--color-background</code><code data-token="--color-background"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-surface"></span><strong>Surface</strong><code>--color-surface</code><code data-token="--color-surface"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-text"></span><strong>Text</strong><code>--color-text</code><code data-token="--color-text"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-success"></span><strong>Success</strong><code>--color-success</code><code data-token="--color-success"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-warning"></span><strong>Warning</strong><code>--color-warning</code><code data-token="--color-warning"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-danger"></span><strong>Danger</strong><code>--color-danger</code><code data-token="--color-danger"></code></li>
+                    <li class="swatch"><span class="swatch__color u-bg-info"></span><strong>Information</strong><code>--color-info</code><code data-token="--color-info"></code></li>
+                </ul>
+
+                <h3>Supporting colors</h3>
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Token</th>
+                                <th scope="col">Used for</th>
+                                <th scope="col">Current value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>--color-text-muted</code></td><td>Secondary text</td><td><code data-token="--color-text-muted"></code></td></tr>
+                            <tr><td><code>--color-surface-alt</code></td><td>Code blocks, quiet backgrounds</td><td><code data-token="--color-surface-alt"></code></td></tr>
+                            <tr><td><code>--color-border</code></td><td>Dividers and card borders</td><td><code data-token="--color-border"></code></td></tr>
+                            <tr><td><code>--color-border-strong</code></td><td>Form control borders</td><td><code data-token="--color-border-strong"></code></td></tr>
+                            <tr><td><code>--color-focus</code></td><td>Keyboard focus outline</td><td><code data-token="--color-focus"></code></td></tr>
+                            <tr><td><code>--color-primary-strong</code></td><td>Hover color of primary items</td><td><code data-token="--color-primary-strong"></code></td></tr>
+                            <tr><td><code>--color-primary-subtle</code></td><td>Light primary background</td><td><code data-token="--color-primary-subtle"></code></td></tr>
+                            <tr><td><code>--color-on-primary</code></td><td>Text on a primary background</td><td><code data-token="--color-on-primary"></code></td></tr>
+                            <tr><td><code>--color-success-subtle</code></td><td>Background of success alerts and badges</td><td><code data-token="--color-success-subtle"></code></td></tr>
+                            <tr><td><code>--color-danger-subtle</code></td><td>Background of danger alerts and badges</td><td><code data-token="--color-danger-subtle"></code></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Type scale</h3>
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Token</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Class and sample</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>--font-size-xs</code></td><td><code data-token="--font-size-xs"></code></td><td><span class="u-fs-xs">.u-fs-xs The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-sm</code></td><td><code data-token="--font-size-sm"></code></td><td><span class="u-fs-sm">.u-fs-sm The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-md</code></td><td><code data-token="--font-size-md"></code></td><td><span class="u-fs-md">.u-fs-md The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-lg</code></td><td><code data-token="--font-size-lg"></code></td><td><span class="u-fs-lg">.u-fs-lg The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-xl</code></td><td><code data-token="--font-size-xl"></code></td><td><span class="u-fs-xl">.u-fs-xl The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-2xl</code></td><td><code data-token="--font-size-2xl"></code></td><td><span class="u-fs-2xl">.u-fs-2xl The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-3xl</code></td><td><code data-token="--font-size-3xl"></code></td><td><span class="u-fs-3xl">.u-fs-3xl The quick brown fox</span></td></tr>
+                            <tr><td><code>--font-size-4xl</code></td><td><code data-token="--font-size-4xl"></code></td><td><span class="u-fs-4xl">.u-fs-4xl The quick brown fox</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Spacing scale</h3>
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Token</th>
+                                <th scope="col">Value</th>
+                                <th scope="col">Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>--space-1</code></td><td><code data-token="--space-1"></code></td><td><span class="space-bar" data-space="1"></span></td></tr>
+                            <tr><td><code>--space-2</code></td><td><code data-token="--space-2"></code></td><td><span class="space-bar" data-space="2"></span></td></tr>
+                            <tr><td><code>--space-3</code></td><td><code data-token="--space-3"></code></td><td><span class="space-bar" data-space="3"></span></td></tr>
+                            <tr><td><code>--space-4</code></td><td><code data-token="--space-4"></code></td><td><span class="space-bar" data-space="4"></span></td></tr>
+                            <tr><td><code>--space-5</code></td><td><code data-token="--space-5"></code></td><td><span class="space-bar" data-space="5"></span></td></tr>
+                            <tr><td><code>--space-6</code></td><td><code data-token="--space-6"></code></td><td><span class="space-bar" data-space="6"></span></td></tr>
+                            <tr><td><code>--space-7</code></td><td><code data-token="--space-7"></code></td><td><span class="space-bar" data-space="7"></span></td></tr>
+                            <tr><td><code>--space-8</code></td><td><code data-token="--space-8"></code></td><td><span class="space-bar" data-space="8"></span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Border radius and shadows</h3>
+                <ul class="swatch-list">
+                    <li class="swatch"><span class="radius-box" data-radius="sm"></span><code>--radius-sm</code><code data-token="--radius-sm"></code></li>
+                    <li class="swatch"><span class="radius-box" data-radius="md"></span><code>--radius-md</code><code data-token="--radius-md"></code></li>
+                    <li class="swatch"><span class="radius-box" data-radius="lg"></span><code>--radius-lg</code><code data-token="--radius-lg"></code></li>
+                    <li class="swatch"><span class="radius-box" data-radius="pill"></span><code>--radius-pill</code><code data-token="--radius-pill"></code></li>
+                    <li class="swatch"><span class="shadow-box" data-shadow="sm"></span><code>--shadow-sm</code></li>
+                    <li class="swatch"><span class="shadow-box" data-shadow="md"></span><code>--shadow-md</code></li>
+                    <li class="swatch"><span class="shadow-box" data-shadow="lg"></span><code>--shadow-lg</code></li>
+                </ul>
+
+                <h3>Container widths and breakpoints</h3>
+                <p>Container widths are CSS custom properties. Breakpoints are Sass-only values, because <code>var()</code> does not work inside <code>@media</code>.</p>
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Container width (CSS variable)</th>
+                                <th scope="col">Breakpoint (Sass map)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>sm</td><td><code data-token="--container-sm"></code></td><td>36em</td></tr>
+                            <tr><td>md</td><td><code data-token="--container-md"></code></td><td>48em</td></tr>
+                            <tr><td>lg</td><td><code data-token="--container-lg"></code></td><td>64em</td></tr>
+                            <tr><td>xl</td><td><code data-token="--container-xl"></code></td><td>80em</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Change a token while the page runs</h3>
+                <p>Custom properties are read by the browser, so changing one value updates everything that uses it. This changes only <code>--color-primary</code>. The hover color and the text color on buttons do not change, so check the contrast yourself.</p>
+                <div class="cluster">
+                    <div class="field">
+                        <label class="field__label" for="playground-color">Primary color</label>
+                        <input class="field__control" type="color" id="playground-color" name="playground_color" value="#1b4db3">
+                    </div>
+                    <button class="btn btn--primary" type="button">Primary button</button>
+                    <button class="btn btn--outline" type="button">Outline button</button>
+                    <a href="#tokens">A link</a>
+                    <button class="btn btn--ghost" type="button" id="playground-reset">Reset color</button>
+                </div>
+            </section>
+
+            <section class="docs-section" id="typography">
+                <h2>Typography</h2>
+                <p>Headings, paragraphs, links and blockquotes are styled on the element, so plain HTML already looks right. Four helper classes cover the rest.</p>
+
+                <div class="docs-demo stack">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <h3>Heading 3</h3>
+                    <h4>Heading 4</h4>
+                    <h5>Heading 5</h5>
+                    <h6>Heading 6</h6>
+                    <p>Body text uses the base size and a line height of 1.6, so paragraphs are easy to read.</p>
+                    <p class="type-lead">Lead text: <code>.type-lead</code> is for an introduction under a heading.</p>
+                    <p><span class="type-label">Label text:</span> <code>.type-label</code> is for form labels and small headings.</p>
+                    <p class="type-caption">Caption text: <code>.type-caption</code> is for notes under an item.</p>
+                    <p class="type-muted">Muted text: <code>.type-muted</code> lowers the emphasis of a paragraph.</p>
+                    <p>A <a href="#typography">link</a> in a sentence. Visited links use their own token.</p>
+                    <blockquote>
+                        <p>A blockquote has a colored edge and a quiet background.</p>
+                        <cite>The design system</cite>
+                    </blockquote>
+                </div>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class or element</th>
+                                <th scope="col">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>h1</code> to <code>h6</code></td><td>Headings. <code>h1</code> and <code>h2</code> scale with the window using <code>clamp()</code></td></tr>
+                            <tr><td><code>.type-lead</code></td><td>Introduction text</td></tr>
+                            <tr><td><code>.type-label</code></td><td>Labels</td></tr>
+                            <tr><td><code>.type-caption</code></td><td>Captions and notes</td></tr>
+                            <tr><td><code>.type-muted</code></td><td>Muted text</td></tr>
+                            <tr><td><code>blockquote</code>, <code>cite</code></td><td>Quotations and their source</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="docs-section" id="buttons">
+                <h2>Buttons</h2>
+
+                <h3>Variants</h3>
+                <div class="docs-demo cluster">
+                    <button class="btn btn--primary" type="button">Primary</button>
+                    <button class="btn btn--secondary" type="button">Secondary</button>
+                    <button class="btn btn--outline" type="button">Outline</button>
+                    <button class="btn btn--ghost" type="button">Ghost</button>
+                    <button class="btn btn--danger" type="button">Danger</button>
+                    <button class="btn btn--success" type="button">Success</button>
+                </div>
+
+                <h3>Sizes</h3>
+                <div class="docs-demo cluster">
+                    <button class="btn btn--primary btn--sm" type="button">Small</button>
+                    <button class="btn btn--primary btn--md" type="button">Medium</button>
+                    <button class="btn btn--primary btn--lg" type="button">Large</button>
+                </div>
+
+                <h3>States</h3>
+                <div class="docs-demo cluster">
+                    <button class="btn btn--primary" type="button" disabled>Disabled</button>
+                    <button class="btn btn--outline" type="button" disabled>Disabled outline</button>
+                    <button class="btn btn--primary btn--loading" type="button" aria-busy="true">Loading</button>
+                    <button class="btn btn--secondary" type="button" data-loading-demo>Try the loading state</button>
+                </div>
+                <p class="type-caption">Hover, press and tab to any button above to see its hover, active and focus states. The last button waits two seconds to show the loading state. It does not send anything.</p>
+
+                <h3>Usage</h3>
+<pre><code>&lt;button class="btn btn--primary btn--lg" type="button"&gt;Save&lt;/button&gt;
+&lt;a class="btn btn--outline" href="#top"&gt;A link that looks like a button&lt;/a&gt;
+&lt;button class="btn btn--primary btn--loading" type="button" aria-busy="true"&gt;Saving&lt;/button&gt;</code></pre>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                <th scope="col">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>.btn</code></td><td>Base button, medium size, primary colors</td></tr>
+                            <tr><td><code>.btn--primary</code>, <code>--secondary</code>, <code>--danger</code>, <code>--success</code></td><td>Filled variants</td></tr>
+                            <tr><td><code>.btn--outline</code>, <code>.btn--ghost</code></td><td>Border only, and no border</td></tr>
+                            <tr><td><code>.btn--sm</code>, <code>--md</code>, <code>--lg</code></td><td>Sizes</td></tr>
+                            <tr><td><code>.btn--loading</code></td><td>Shows a spinner and ignores clicks. Add <code>aria-busy="true"</code></td></tr>
+                            <tr><td><code>disabled</code> attribute</td><td>Disabled state</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="docs-section" id="forms">
+                <h2>Forms</h2>
+                <p>Each control sits in a <code>.field</code> with a label and optional help text. The fields below are not in a form, so nothing is submitted.</p>
+
+                <div class="docs-demo stack">
+                    <div class="field">
+                        <label class="field__label" for="f-name">Text input</label>
+                        <input class="field__control" type="text" id="f-name" name="full_name" placeholder="Enter your full name" autocomplete="name">
+                        <p class="field__help">Help text explains what to type.</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-email">Email input</label>
+                        <input class="field__control" type="email" id="f-email" name="email_address" placeholder="name@example.com" autocomplete="email">
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-password">Password input</label>
+                        <input class="field__control" type="password" id="f-password" name="password" placeholder="Enter a password" autocomplete="new-password">
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-message">Textarea</label>
+                        <textarea class="field__control field__control--textarea" id="f-message" name="message" rows="4" placeholder="Write a message"></textarea>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-select">Select dropdown</label>
+                        <select class="field__control" id="f-select" name="topic">
+                            <option value="">-- Choose a topic --</option>
+                            <option value="design">Design</option>
+                            <option value="code">Code</option>
+                            <option value="review">Review</option>
+                        </select>
+                    </div>
+
+                    <fieldset class="stack" style="--stack-gap: var(--space-2)">
+                        <legend class="field__label">Checkboxes</legend>
+                        <label class="check"><input class="check__input" type="checkbox" name="topics" value="html" checked><span class="check__label">HTML</span></label>
+                        <label class="check"><input class="check__input" type="checkbox" name="topics" value="css"><span class="check__label">CSS</span></label>
+                        <label class="check"><input class="check__input" type="checkbox" name="topics" value="js" disabled><span class="check__label">JavaScript (disabled)</span></label>
+                    </fieldset>
+
+                    <fieldset class="stack" style="--stack-gap: var(--space-2)">
+                        <legend class="field__label">Radio buttons</legend>
+                        <label class="check"><input class="check__input" type="radio" name="plan" value="free" checked><span class="check__label">Free plan</span></label>
+                        <label class="check"><input class="check__input" type="radio" name="plan" value="team"><span class="check__label">Team plan</span></label>
+                    </fieldset>
+
+                    <div class="stack" style="--stack-gap: var(--space-2)">
+                        <label class="switch"><input class="switch__input" type="checkbox" role="switch" name="notifications"><span class="switch__track"></span><span class="switch__label">Toggle switch</span></label>
+                        <label class="switch"><input class="switch__input" type="checkbox" role="switch" name="updates" checked><span class="switch__track"></span><span class="switch__label">Toggle switch, switched on</span></label>
+                    </div>
+                </div>
+
+                <h3>Validation states</h3>
+                <div class="docs-demo stack">
+                    <div class="field field--error">
+                        <label class="field__label" for="f-error">Error state</label>
+                        <input class="field__control" type="email" id="f-error" name="error_email" value="not-an-email">
+                        <p class="field__error">Enter an email address like name@example.com.</p>
+                    </div>
+
+                    <div class="field field--success">
+                        <label class="field__label" for="f-success">Success state</label>
+                        <input class="field__control" type="email" id="f-success" name="success_email" value="name@example.com">
+                        <p class="field__success">This address can be used.</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-disabled">Disabled state</label>
+                        <input class="field__control" type="text" id="f-disabled" name="disabled_field" value="This field cannot be changed" disabled>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="f-live">Try it: type an email address</label>
+                        <input class="field__control" type="email" id="f-live" name="live_email" placeholder="name@example.com" data-validate>
+                        <p class="field__help">The state changes while you type.</p>
+                        <p class="field__error">This is not a valid email address yet.</p>
+                        <p class="field__success">This looks like a valid email address.</p>
+                    </div>
+                </div>
+
+                <h3>Usage</h3>
+<pre><code>&lt;div class="field field--error"&gt;
+    &lt;label class="field__label" for="email"&gt;Email&lt;/label&gt;
+    &lt;input class="field__control" type="email" id="email" name="email"&gt;
+    &lt;p class="field__error"&gt;Enter a valid email address.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                <th scope="col">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>.field</code>, <code>.field__label</code></td><td>Wrapper and label</td></tr>
+                            <tr><td><code>.field__control</code>, <code>--textarea</code></td><td>Text, email, password, select and textarea controls</td></tr>
+                            <tr><td><code>.field__help</code>, <code>__error</code>, <code>__success</code></td><td>Messages under a control. Error and success show only in their state</td></tr>
+                            <tr><td><code>.field--error</code>, <code>.field--success</code></td><td>Validation states, set on the <code>.field</code></td></tr>
+                            <tr><td><code>.check</code>, <code>__input</code>, <code>__label</code></td><td>Checkbox and radio button</td></tr>
+                            <tr><td><code>.switch</code>, <code>__input</code>, <code>__track</code>, <code>__label</code></td><td>Toggle switch</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="docs-section" id="cards">
+                <h2>Cards</h2>
+
+                <h3>Basic card</h3>
+                <div class="grid-auto">
+                    <article class="card">
+                        <header class="card__header"><h3 class="card__title">Basic card</h3></header>
+                        <div class="card__body"><p>Cards have an optional header, a body and a footer.</p></div>
+                        <footer class="card__footer"><button class="btn btn--primary btn--sm" type="button">Action</button></footer>
+                    </article>
+
+                    <article class="card card--elevated">
+                        <header class="card__header"><h3 class="card__title">Elevated card</h3></header>
+                        <div class="card__body"><p><code>.card--elevated</code> uses a larger shadow and no border.</p></div>
+                    </article>
+
+                    <article class="card card--interactive">
+                        <header class="card__header"><h3 class="card__title">Interactive card</h3></header>
+                        <div class="card__body"><p><code>.card--interactive</code> lifts when you hover it.</p></div>
+                    </article>
+                </div>
+
+                <h3>Profile card in different containers</h3>
+                <p>The same markup is placed in a narrow and a wide container. The card reads the width of its container, not the width of the window.</p>
+                <div class="docs-pair">
+                    <div class="cq docs-pair__narrow">
+                        <article class="card profile-card">
+                            <span class="avatar avatar--lg profile-card__avatar">AK</span>
+                            <div class="profile-card__body">
+                                <h4 class="profile-card__name">Ayesha Khan</h4>
+                                <p class="profile-card__role">Administrator</p>
+                            </div>
+                            <div class="profile-card__actions">
+                                <button class="btn btn--primary btn--sm" type="button">Message</button>
+                                <button class="btn btn--outline btn--sm" type="button">Profile</button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="cq docs-pair__wide">
+                        <article class="card profile-card">
+                            <span class="avatar avatar--lg profile-card__avatar">AK</span>
+                            <div class="profile-card__body">
+                                <h4 class="profile-card__name">Ayesha Khan</h4>
+                                <p class="profile-card__role">Administrator</p>
+                            </div>
+                            <div class="profile-card__actions">
+                                <button class="btn btn--primary btn--sm" type="button">Message</button>
+                                <button class="btn btn--outline btn--sm" type="button">Profile</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <h3>Statistics cards</h3>
+                <div class="grid-auto" style="--grid-min: 12rem">
+                    <div class="cq">
+                        <article class="card stat-card">
+                            <h4 class="stat-card__label">Total users</h4>
+                            <p class="stat-card__value">1,284</p>
+                            <p class="stat-card__trend stat-card__trend--up">12% since last month</p>
+                        </article>
+                    </div>
+
+                    <div class="cq">
+                        <article class="card stat-card">
+                            <h4 class="stat-card__label">Open issues</h4>
+                            <p class="stat-card__value">37</p>
+                            <p class="stat-card__trend stat-card__trend--down">8% since last month</p>
+                        </article>
+                    </div>
+
+                    <div class="cq">
+                        <article class="card stat-card">
+                            <h4 class="stat-card__label">Completed tasks</h4>
+                            <p class="stat-card__value">942</p>
+                            <p class="stat-card__trend stat-card__trend--up">5% since last month</p>
+                        </article>
+                    </div>
+                </div>
+
+                <h3>Pricing cards</h3>
+                <div class="grid-auto" style="--grid-min: 14rem">
+                    <div class="cq">
+                        <article class="card pricing-card">
+                            <h4 class="pricing-card__plan">Starter</h4>
+                            <p class="pricing-card__price">$0 <span class="pricing-card__period">per month</span></p>
+                            <ul class="pricing-card__features">
+                                <li class="pricing-card__feature">1 project</li>
+                                <li class="pricing-card__feature">Community support</li>
+                            </ul>
+                            <button class="btn btn--outline" type="button">Choose Starter</button>
+                        </article>
+                    </div>
+
+                    <div class="cq">
+                        <article class="card pricing-card pricing-card--featured">
+                            <h4 class="pricing-card__plan">Team <span class="badge badge--info">Popular</span></h4>
+                            <p class="pricing-card__price">$19 <span class="pricing-card__period">per month</span></p>
+                            <ul class="pricing-card__features">
+                                <li class="pricing-card__feature">10 projects</li>
+                                <li class="pricing-card__feature">Email support</li>
+                                <li class="pricing-card__feature">Shared themes</li>
+                            </ul>
+                            <button class="btn btn--primary" type="button">Choose Team</button>
+                        </article>
+                    </div>
+
+                    <div class="cq">
+                        <article class="card pricing-card">
+                            <h4 class="pricing-card__plan">Business</h4>
+                            <p class="pricing-card__price">$49 <span class="pricing-card__period">per month</span></p>
+                            <ul class="pricing-card__features">
+                                <li class="pricing-card__feature">Unlimited projects</li>
+                                <li class="pricing-card__feature">Priority support</li>
+                                <li class="pricing-card__feature">Shared themes</li>
+                                <li class="pricing-card__feature">Audit log</li>
+                            </ul>
+                            <button class="btn btn--outline" type="button">Choose Business</button>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                <th scope="col">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>.card</code>, <code>__header</code>, <code>__title</code>, <code>__body</code>, <code>__footer</code></td><td>Basic card parts</td></tr>
+                            <tr><td><code>.card--elevated</code>, <code>.card--interactive</code></td><td>Larger shadow, and a hover lift</td></tr>
+                            <tr><td><code>.avatar</code>, <code>.avatar--lg</code></td><td>Round initials</td></tr>
+                            <tr><td><code>.profile-card</code> and its <code>__avatar</code>, <code>__body</code>, <code>__name</code>, <code>__role</code>, <code>__actions</code></td><td>Profile card. Add it to a <code>.card</code>. It places the avatar beside the text once its container is 28rem wide</td></tr>
+                            <tr><td><code>.stat-card</code> and its <code>__label</code>, <code>__value</code>, <code>__trend</code>, <code>__trend--up</code>, <code>__trend--down</code></td><td>Statistics card. The value scales with the container</td></tr>
+                            <tr><td><code>.pricing-card</code>, <code>--featured</code> and its <code>__plan</code>, <code>__price</code>, <code>__period</code>, <code>__features</code>, <code>__feature</code></td><td>Pricing card</td></tr>
+                            <tr><td><code>.cq</code></td><td>Put it on the <strong>parent</strong> of a card so the card can respond to its width</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="docs-section" id="feedback">
+                <h2>Alerts, badges and progress</h2>
+
+                <h3>Alerts</h3>
+                <div class="docs-demo stack">
+                    <div class="alert alert--info" role="status">
+                        <p class="alert__title">Info</p>
+                        <p class="alert__text">A neutral message.</p>
+                    </div>
+                    <div class="alert alert--success" role="status">
+                        <p class="alert__title">Success</p>
+                        <p class="alert__text">Something worked.</p>
+                    </div>
+                    <div class="alert alert--warning" role="status">
+                        <p class="alert__title">Warning</p>
+                        <p class="alert__text">Check this before you continue.</p>
+                    </div>
+                    <div class="alert alert--danger" role="alert">
+                        <p class="alert__title">Error</p>
+                        <p class="alert__text">Something went wrong.</p>
+                    </div>
+                </div>
+
+                <h3>Badges and notification badges</h3>
+                <div class="docs-demo cluster">
+                    <span class="badge">Neutral</span>
+                    <span class="badge badge--info">Info</span>
+                    <span class="badge badge--success">Success</span>
+                    <span class="badge badge--warning">Warning</span>
+                    <span class="badge badge--danger">Danger</span>
+
+                    <span class="indicator">
+                        <button class="btn btn--outline" type="button">Inbox</button>
+                        <span class="badge badge--count indicator__badge">3<span class="u-visually-hidden"> unread messages</span></span>
+                    </span>
+                </div>
+
+                <h3>Progress bars</h3>
+                <div class="docs-demo stack">
+                    <div class="progress" role="progressbar" aria-label="Default progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><div class="progress__bar" data-value="50"></div></div>
+                    <div class="progress progress--success" role="progressbar" aria-label="Success progress" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"><div class="progress__bar" data-value="80"></div></div>
+                    <div class="progress progress--warning progress--lg" role="progressbar" aria-label="Warning progress, large" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"><div class="progress__bar" data-value="30"></div></div>
+                    <div class="progress progress--danger progress--sm" role="progressbar" aria-label="Danger progress, small" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><div class="progress__bar" data-value="10"></div></div>
+                    <div class="progress progress--indeterminate" role="progressbar" aria-label="Loading"><div class="progress__bar"></div></div>
+                </div>
+
+                <h3>Usage</h3>
+<pre><code>&lt;div class="alert alert--danger" role="alert"&gt;
+    &lt;p class="alert__title"&gt;Error&lt;/p&gt;
+    &lt;p class="alert__text"&gt;Something went wrong.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="progress progress--success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"&gt;
+    &lt;div class="progress__bar" data-value="80"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Class</th>
+                                <th scope="col">Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>.alert</code>, <code>__title</code>, <code>__text</code></td><td>Message box. Title and text keep the state readable without color</td></tr>
+                            <tr><td><code>.alert--info</code>, <code>--success</code>, <code>--warning</code>, <code>--danger</code></td><td>State variants</td></tr>
+                            <tr><td><code>.badge</code>, <code>--info</code>, <code>--success</code>, <code>--warning</code>, <code>--danger</code></td><td>Status labels</td></tr>
+                            <tr><td><code>.badge--count</code>, <code>.indicator</code>, <code>.indicator__badge</code></td><td>A count placed on the corner of another element</td></tr>
+                            <tr><td><code>.progress</code>, <code>.progress__bar</code></td><td>Track and bar. Set the value with <code>data-value</code> in steps of 10</td></tr>
+                            <tr><td><code>.progress--success</code>, <code>--warning</code>, <code>--danger</code>, <code>--info</code></td><td>Bar colors</td></tr>
+                            <tr><td><code>.progress--sm</code>, <code>--lg</code>, <code>--indeterminate</code></td><td>Sizes and a moving bar when the length is unknown</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="docs-section" id="overlays">
+                <h2>Tooltips and modal</h2>
+
+                <h3>Tooltips</h3>
+                <div class="docs-demo cluster">
+                    <span class="tooltip" data-tooltip="Appears above the text" tabindex="0">Hover or focus me</span>
+                    <span class="tooltip tooltip--bottom" data-tooltip="Appears below the text" tabindex="0">A tooltip below</span>
+                </div>
+                <p class="type-caption">The tooltip text is a hint. Do not put information there that a person must read. Near the edge of a small window, a long tooltip can be cut off.</p>
+
+                <h3>Modal</h3>
+                <div class="docs-demo cluster">
+                    <button class="btn btn--primary" type="button" data-modal-open="demo-modal">Open the modal</button>
+                </div>
+                <p class="type-caption">The modal uses the native <code>&lt;dialog&gt;</code> element. Press Escape, click the dark area or use a button to close it.</p>
+
+<pre><code>&lt;dialog class="modal" id="demo-modal" aria-labelledby="demo-modal-title"&gt;
+    &lt;form method="dialog"&gt;
+        &lt;div class="modal__header"&gt;&lt;h3 class="modal__title" id="demo-modal-title"&gt;Title&lt;/h3&gt;&lt;/div&gt;
+        &lt;div class="modal__body"&gt;&lt;p&gt;Content&lt;/p&gt;&lt;/div&gt;
+        &lt;div class="modal__footer"&gt;&lt;button class="btn btn--primary"&gt;Close&lt;/button&gt;&lt;/div&gt;
+    &lt;/form&gt;
+&lt;/dialog&gt;</code></pre>
+
+                <dialog class="modal" id="demo-modal" aria-labelledby="demo-modal-title">
+                    <form method="dialog">
+                        <div class="modal__header"><h3 class="modal__title" id="demo-modal-title">Delete this item?</h3></div>
+                        <div class="modal__body"><p>This is a demonstration. Nothing is deleted.</p></div>
+                        <div class="modal__footer">
+                            <button class="btn btn--outline" value="cancel">Cancel</button>
+                            <button class="btn btn--danger" value="confirm">Delete</button>
+                        </div>
+                    </form>
+                </dialog>
+            </section>
+
+            <section class="docs-section" id="responsive">
+                <h2>Responsive behavior</h2>
+                <p>Components respond to the space they are placed in. Page layout responds to the window.</p>
+
+                <div class="docs-scroll">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Use this</th>
+                                <th scope="col">When</th>
+                                <th scope="col">Examples here</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Container query (<code>@container</code>)</td>
+                                <td>A component can sit in a wide or a narrow place, such as a main column, a sidebar or a grid cell</td>
+                                <td>Profile, statistics and pricing cards</td>
+                            </tr>
+                            <tr>
+                                <td>Media query (<code>@media</code>)</td>
+                                <td>The decision depends on the window or the device: page layout, navigation, and user preferences</td>
+                                <td>The documentation sidebar, <code>prefers-color-scheme</code>, <code>prefers-reduced-motion</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>clamp()</code></td>
+                                <td>A size should grow smoothly between two limits</td>
+                                <td>Headings and the big card numbers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Resize a container</h3>
+                <p>On a desktop browser, drag the bottom-right corner of the dashed box. The card changes layout at 28rem of container width, and the window does not change.</p>
+                <div class="cq cq-demo">
+                    <article class="card profile-card">
+                        <span class="avatar avatar--lg profile-card__avatar">HA</span>
+                        <div class="profile-card__body">
+                            <h4 class="profile-card__name">Hamza Ali</h4>
+                            <p class="profile-card__role">Mentor</p>
+                        </div>
+                        <div class="profile-card__actions">
+                            <button class="btn btn--primary btn--sm" type="button">Message</button>
+                            <button class="btn btn--outline btn--sm" type="button">Profile</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <noscript>
+        <p class="type-caption">JavaScript is needed for the theme buttons, the token values and the demos. The components themselves work without it, and they follow your device theme.</p>
+    </noscript>
+
+    <footer class="docs-footer">
+        <p class="type-caption">&copy; 2026 Touseef Ahmed. Bloomrix UI is a sample design system built for the Bloomrix internship.</p>
+    </footer>
+</body>
+
+</html>

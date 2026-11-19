@@ -1,0 +1,40 @@
+@use "../abstracts" as *;
+
+.badge {
+    align-items: center;
+    background-color: var(--badge-bg, #{token-color("surface-alt")});
+    border: 1px solid var(--badge-fg, #{token-color("border-strong")});
+    border-radius: var(--radius-pill);
+    color: var(--badge-fg, #{token-color("text")});
+    display: inline-flex;
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    padding: space(1) space(3);
+}
+
+@each $name in $status-names {
+    .badge--#{$name} {
+        --badge-bg: #{token-color("#{$name}-subtle")};
+        --badge-fg: #{token-color($name)};
+    }
+}
+
+.badge--count {
+    --badge-bg: #{token-color("danger")};
+    --badge-fg: #{token-color("on-danger")};
+    border-color: transparent;
+    justify-content: center;
+    min-inline-size: 1.5rem;
+    padding: 0 space(2);
+}
+
+.indicator {
+    display: inline-block;
+    position: relative;
+}
+
+.indicator__badge {
+    inset-block-start: -0.5rem;
+    inset-inline-end: -0.5rem;
+    position: absolute;
+}

@@ -1,0 +1,11 @@
+@use "../abstracts" as *;
+
+[data-theme="dark"] {
+    @include theme-tokens($palette-dark, dark);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        @include theme-tokens($palette-dark, dark);
+    }
+}

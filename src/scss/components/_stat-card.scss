@@ -1,0 +1,43 @@
+@use "../abstracts" as *;
+
+.stat-card {
+    padding: space(5);
+}
+
+.stat-card__label {
+    color: token-color("text-muted");
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    margin: 0 0 space(2);
+    text-transform: uppercase;
+}
+
+.stat-card__value {
+    font-size: clamp(1.75rem, 12cqi, 3rem);
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+}
+
+.stat-card__trend {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin: space(2) 0 0;
+}
+
+.stat-card__trend--up {
+    color: token-color("success");
+
+    &::before {
+        content: "\25B2  Up ";
+    }
+}
+
+.stat-card__trend--down {
+    color: token-color("danger");
+
+    &::before {
+        content: "\25BC  Down ";
+    }
+}

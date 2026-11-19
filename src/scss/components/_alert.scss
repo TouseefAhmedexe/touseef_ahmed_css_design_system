@@ -1,0 +1,27 @@
+@use "../abstracts" as *;
+
+.alert {
+    background-color: var(--alert-bg, #{token-color("info-subtle")});
+    border: 1px solid var(--alert-color, #{token-color("info")});
+    border-inline-start-width: 0.35rem;
+    border-radius: var(--radius-md);
+    color: token-color("text");
+    padding: space(3) space(4);
+}
+
+.alert__title {
+    color: var(--alert-color, #{token-color("info")});
+    font-weight: 700;
+    margin: 0 0 space(1);
+}
+
+.alert__text {
+    margin: 0;
+}
+
+@each $name in $status-names {
+    .alert--#{$name} {
+        --alert-color: #{token-color($name)};
+        --alert-bg: #{token-color("#{$name}-subtle")};
+    }
+}

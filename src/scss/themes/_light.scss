@@ -1,0 +1,6 @@
+@use "../abstracts" as *;
+
+:root,
+[data-theme="light"] {
+    @include theme-tokens($palette-light, light);
+}

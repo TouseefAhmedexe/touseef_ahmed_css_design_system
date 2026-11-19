@@ -1,0 +1,67 @@
+@use "../abstracts" as *;
+
+.card {
+    background-color: token-color("surface");
+    border: 1px solid token-color("border");
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    color: token-color("text");
+    display: flex;
+    flex-direction: column;
+}
+
+.card__header {
+    border-block-end: 1px solid token-color("border");
+    padding: space(4) space(5);
+}
+
+.card__title {
+    font-size: var(--font-size-xl);
+    margin: 0;
+}
+
+.card__body {
+    flex: 1;
+    padding: space(5);
+}
+
+.card__footer {
+    border-block-start: 1px solid token-color("border");
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(2);
+    padding: space(4) space(5);
+}
+
+.card--elevated {
+    border-color: transparent;
+    box-shadow: var(--shadow-lg);
+}
+
+.card--interactive {
+    transition: box-shadow var(--duration-base) var(--ease-standard), transform var(--duration-base) var(--ease-standard);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+    }
+}
+
+.avatar {
+    align-items: center;
+    background-color: token-color("primary-subtle");
+    block-size: 2.5rem;
+    border-radius: var(--radius-full);
+    color: token-color("primary-strong");
+    display: inline-flex;
+    flex-shrink: 0;
+    font-weight: 700;
+    inline-size: 2.5rem;
+    justify-content: center;
+}
+
+.avatar--lg {
+    block-size: 4rem;
+    font-size: var(--font-size-xl);
+    inline-size: 4rem;
+}

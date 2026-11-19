@@ -1,0 +1,8 @@
+@use "../abstracts" as *;
+
+.container {
+    inline-size: 100%;
+    margin-inline: auto;
+    max-inline-size: var(--container-xl);
+    padding-inline: space(4);
+}

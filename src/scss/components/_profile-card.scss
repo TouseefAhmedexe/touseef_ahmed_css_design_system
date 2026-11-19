@@ -1,0 +1,45 @@
+@use "../abstracts" as *;
+
+.profile-card {
+    align-items: center;
+    display: grid;
+    gap: space(3);
+    justify-items: center;
+    padding: space(5);
+    text-align: center;
+}
+
+.profile-card__name {
+    font-size: var(--font-size-lg);
+    margin: 0;
+}
+
+.profile-card__role {
+    color: token-color("text-muted");
+    margin: 0;
+}
+
+.profile-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: space(2);
+    justify-content: center;
+}
+
+@container (min-width: 28rem) {
+    .profile-card {
+        column-gap: space(5);
+        grid-template-columns: auto 1fr;
+        justify-items: start;
+        text-align: start;
+    }
+
+    .profile-card__avatar {
+        grid-row: 1 / span 2;
+    }
+
+    .profile-card__actions {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+}

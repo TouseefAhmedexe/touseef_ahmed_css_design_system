@@ -1,0 +1,76 @@
+@use "../abstracts" as *;
+
+.check {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    gap: space(2);
+
+    &:has(.check__input:disabled) {
+        cursor: not-allowed;
+        opacity: 0.55;
+    }
+}
+
+.check__input {
+    accent-color: token-color("primary");
+    block-size: 1.25rem;
+    cursor: inherit;
+    flex-shrink: 0;
+    inline-size: 1.25rem;
+    margin: 0;
+
+    &:focus-visible {
+        @include focus-ring;
+    }
+}
+
+.switch {
+    align-items: center;
+    cursor: pointer;
+    display: inline-flex;
+    gap: space(3);
+}
+
+.switch__input {
+    @include visually-hidden;
+}
+
+.switch__track {
+    background-color: token-color("border-strong");
+    block-size: 1.5rem;
+    border-radius: var(--radius-pill);
+    flex-shrink: 0;
+    inline-size: 2.75rem;
+    position: relative;
+    transition: background-color var(--duration-fast) var(--ease-standard);
+
+    &::after {
+        background-color: token-color("surface");
+        block-size: 1.1rem;
+        border-radius: 50%;
+        content: "";
+        inline-size: 1.1rem;
+        inset-block-start: 0.2rem;
+        inset-inline-start: 0.2rem;
+        position: absolute;
+        transition: transform var(--duration-fast) var(--ease-standard);
+    }
+}
+
+.switch__input:checked + .switch__track {
+    background-color: token-color("primary");
+}
+
+.switch__input:checked + .switch__track::after {
+    transform: translateX(1.25rem);
+}
+
+.switch__input:focus-visible + .switch__track {
+    @include focus-ring;
+}
+
+.switch__input:disabled + .switch__track {
+    cursor: not-allowed;
+    opacity: 0.55;
+}

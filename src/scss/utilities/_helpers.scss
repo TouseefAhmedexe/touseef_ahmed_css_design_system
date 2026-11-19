@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../abstracts" as *;
+
+.u-visually-hidden {
+    @include visually-hidden;
+}
+
+.u-text-center {
+    text-align: center;
+}
+
+@each $name in $core-colors {
+    .u-bg-#{$name} {
+        background-color: token-color($name);
+    }
+}
+
+@each $name in map.keys($type-scale) {
+    .u-fs-#{$name} {
+        font-size: var(--font-size-#{$name});
+    }
+}
+
+@each $step in map.keys($space-scale) {
+    .u-mt-#{$step} {
+        margin-block-start: var(--space-#{$step});
+    }
+}

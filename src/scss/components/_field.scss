@@ -1,0 +1,94 @@
+@use "../abstracts" as *;
+
+.field {
+    display: grid;
+    gap: space(1);
+}
+
+.field__label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.field__control {
+    background-color: token-color("surface");
+    border: 2px solid var(--field-border, #{token-color("border-strong")});
+    border-radius: var(--radius-md);
+    color: token-color("text");
+    inline-size: 100%;
+    min-block-size: to-rem(44);
+    padding: space(2) space(3);
+    transition: border-color var(--duration-fast) var(--ease-standard);
+
+    &::placeholder {
+        color: token-color("text-muted");
+        font-style: italic;
+    }
+
+    &:hover:not(:disabled) {
+        border-color: var(--field-border-hover, #{token-color("primary")});
+    }
+
+    &:focus-visible {
+        border-color: var(--field-border-hover, #{token-color("primary")});
+        @include focus-ring;
+    }
+
+    &:disabled {
+        background-color: token-color("surface-alt");
+        border-style: dashed;
+        color: token-color("text-muted");
+        cursor: not-allowed;
+    }
+}
+
+.field__control--textarea {
+    min-block-size: 6rem;
+    resize: vertical;
+}
+
+.field__help,
+.field__error,
+.field__success {
+    font-size: var(--font-size-sm);
+    margin: 0;
+}
+
+.field__help {
+    color: token-color("text-muted");
+}
+
+.field__error {
+    color: token-color("danger");
+    display: none;
+
+    &::before {
+        content: "Error: ";
+        font-weight: 700;
+    }
+}
+
+.field__success {
+    color: token-color("success");
+    display: none;
+
+    &::before {
+        content: "Valid: ";
+        font-weight: 700;
+    }
+}
+
+.field--error {
+    --field-border: #{token-color("danger")};
+    --field-border-hover: #{token-color("danger")};
+}
+
+.field--success {
+    --field-border: #{token-color("success")};
+    --field-border-hover: #{token-color("success")};
+}
+
+.field--error .field__error,
+.field--success .field__success {
+    display: block;
+}

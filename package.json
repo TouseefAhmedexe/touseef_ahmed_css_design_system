@@ -1,0 +1,14 @@
+{
+    "name": "touseef-ahmed-css-design-system",
+    "private": true,
+    "version": "1.0.0",
+    "scripts": {
+        "build": "sass --style=expanded --source-map src/scss/main.scss dist/bloomrix-ui.css",
+        "build:min": "sass --style=compressed --no-source-map src/scss/main.scss dist/bloomrix-ui.min.css",
+        "build:all": "npm run build && npm run build:min",
+        "watch": "sass --watch --style=expanded --source-map src/scss/main.scss dist/bloomrix-ui.css"
+    },
+    "devDependencies": {
+        "sass": "^1.108.2"
+    }
+}
